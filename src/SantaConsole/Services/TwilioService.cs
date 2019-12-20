@@ -30,6 +30,11 @@ namespace SantaConsole.Services
       if (string.IsNullOrWhiteSpace(_fromNumber)) throw new BadEnvironmentForTwilioException();
 
       this.GiftExchangeName = $"Secret Santa {DateTime.Today.Year}";
+
+      // New accounts and subaccounts are now required to use TLS 1.2 when accessing the REST API.
+      //   If the error thrown is "Upgrade Required" what it really means, is you need your ServicePointManager to use TLS 1.2
+      //   the line below does that.
+      System.Net.ServicePointManager.SecurityProtocol = System.Net.SecurityProtocolType.Tls12;
     }
 
     /// <summary>
